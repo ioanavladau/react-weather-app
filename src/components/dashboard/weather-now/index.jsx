@@ -2,11 +2,14 @@ import React from 'react';
 
 import "./style.scss";
 
-import Weather from "./weather";
+import { TiLocation } from 'react-icons/ti';
+
+
+// import WeatherNow from "./weather";
 
 import { Manager, Reference, Popper } from 'react-popper';
 
-export default class TopSection extends React.Component {
+export default class WeatherLocation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,14 +36,15 @@ export default class TopSection extends React.Component {
         const { isSelectLocationOpen } = this.state;
         const { eventEmitter } = this.props;
 
-        return <div className="top-container">
-            <div className="title">Weather Up</div>
-            <Weather {...this.props}/>
+        return <div className="select-city-container">
+            <div className="location">
+                <span><TiLocation /></span> {this.props.location}
+            </div>
             <Manager>
                 <Reference>
                 {({ ref }) => (
                     <button className="btn btn-select-location" ref={ref} onClick={this.onToggleSelectLocation.bind(this)}>
-                        Select Location
+                        Select Another Location
                     </button>
                 )}
                 </Reference>
@@ -48,18 +52,21 @@ export default class TopSection extends React.Component {
                 {({ ref, style, placement, arrowProps }) => 
                     isSelectLocationOpen && (
                         <div 
-                            className="popup-container" 
+                            className="popup-container"
                             ref={ref} 
                             style={style} 
                             data-placement={placement}
                         >
                             <div className="form-container">
-                                <label htmlFor="location-name">Location Name</label>
+                                {/* <label htmlFor="location-name">Location Name</label> */}
+                                {/* <label for="nme"><span>City</span></label> */}
+
                                 <input 
                                     id="location-name" 
                                     type="text" 
                                     placeholder="City Name"
                                     onChange={this.onLocationNameChange.bind(this)}
+                                    type="text" name="name" className="question" id="nme" required autoComplete="off" 
                                 />
                                 <button className="btn btn-select-location" onClick={this.onSelectCity.bind(this)}>Select</button>
                             </div>
@@ -69,6 +76,8 @@ export default class TopSection extends React.Component {
                 }
                 </Popper>
             </Manager>
+            {/* <WeatherNow {...this.props}/> */}
+            
         </div>;
     }
 }

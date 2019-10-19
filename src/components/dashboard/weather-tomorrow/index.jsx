@@ -3,20 +3,19 @@ import "./style.scss";
 
 import ForecastDay from './forecastDay';
 
-export default class BottomSection extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+export default class WeatherTomorrow extends React.Component {
+
 
     render() {
         const { forecastDays } = this.props;
-        return <div className="bottom-container">
+        return <div>
+                <div className="header">Tomorrow</div>
                 <div className="inner-container">
+                    
                     {forecastDays && Object.keys(forecastDays).map((day, index) => {
                         // return <ForecastDay day={day} key={index}/>
                         console.log(forecastDays[day])
-                        return <ForecastDay day={forecastDays[day].avgtemp} key={index}/>
+                        return <ForecastDay day={forecastDays[day].avgtemp + "°C"} key={index}/>
                         
                     })}
                 </div>
